@@ -18,8 +18,13 @@ variable "Tags" { # local variable
     description = "Tags of the SG"
 }
 
-variable "vpc_id" {
+variable "vpc_id" { # local variable
   description = "ID of the VPC from VPC module -> outputs"
 }
 
 
+variable "ingress_ports" { # local variable
+  description = "List of ingress ports"
+  type        = list(string)
+  default     = ["22"]
+}

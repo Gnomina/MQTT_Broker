@@ -1,22 +1,24 @@
-module "VPC" { #Include VPC module
-  source = "./terraform/VPC" #VPC Module PATH
+module "VPC" { # Include VPC module
+  source = "./terraform/VPC" # VPC Module PATH
 
-  env = "Pico-test" #enviorement name
-  azs = ["eu-central-1a"] # how many zones are needed
-  public_subnets = ["10.0.64.0/19"] # how many subnets are needed
+  env = "Pico-test" # Enviorement name
+  azs = ["eu-central-1a"] # How many zones are needed
+  public_subnets = ["10.0.64.0/19"] # How many subnets are needed
 
   public_subnet_tags = {
     "Pico-dev-demo" = "test"
   }
 }
 
-module "SG" {
-  source = "./terraform/SG"
+module "SG" { # Include VPC module
+  source = "./terraform/SG" # VPC Module PATH
   
-  vpc_id = module.VPC.vpc_id_out
-
-  Name = "Pico-SG"
+  vpc_id = module.VPC.vpc_id_out # Variable from VPC module
+  
+  Name = "Pico-SG" # Security group name
+  ingress_ports = ["22", "80"] # Alloved ports
+  
   Tags = {
-    Name = "Pico-test_SG"
+    Name = "Pico-test_SG" # Security group tags name
   }
 }
