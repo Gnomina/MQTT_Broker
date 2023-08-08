@@ -2,7 +2,7 @@
 #----------------Instance Variables----------------
 
 variable "instance_type"{
-  default     = "t2.mikro" # Local variable
+  default     = "t2.micro" # Local variable
     description = "(Free tire eligible t2micro) t2.small instance"
 }
 
