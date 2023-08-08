@@ -22,3 +22,15 @@ module "SG" { # Include VPC module
     Name = "Pico-test_SG" # Security group tags name
   }
 }
+
+module "Instance"{
+  source = "./terrform/Instance"
+
+  subnet_id = module.VPS.subnet_id_out
+  sucurity_group = module.SG.security_group_id_out
+  
+  Tags = {
+    Name = "Pico-test_Instance" # Security group tags name
+  }
+  
+}
