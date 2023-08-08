@@ -15,7 +15,7 @@ resource "aws_instance" "this"{
   ami                    = data.aws_ami.latest_ubuntu.id
   instance_type          = "${var.instance_type}"
   key_name               = "${var.key_name}"
-  vpc_security_group_ids = ["${var.sucurity_group}"]
+  vpc_security_group_ids = ["${var.security_group}"]
   subnet_id              = "${var.subnet_id}"
   associate_public_ip_address = true
   tags = {
