@@ -4,6 +4,6 @@ resource "aws_subnet" "public_eu_central_1a" {
   availability_zone = "eu-central-1a"
   
   tags = {
-    Name = "pico-dev-subnet"
+    Name = "pico-dev-PUB-subnet"
   }
 }

@@ -7,7 +7,7 @@ resource "aws_route_table" "public" {
   }
 
   tags = {
-    Name = "pico-dev-RT-public"
+    Name = "pico-dev-RT-PUB"
   }
   
 }
