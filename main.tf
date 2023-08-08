@@ -23,7 +23,7 @@ module "SG" { # Include VPC module
   }
 }
 
-module "Instance"{
+module "instance" {
   source = "./terrform/instance"
 
   subnet_id = module.VPS.subnet_id_out
