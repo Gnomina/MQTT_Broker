@@ -21,7 +21,7 @@ resource "aws_instance" "this"{
   subnet_id              = var.subnet_ids[count.index]
   associate_public_ip_address = true
   tags = {
-    Name = "var.Tags"
+    Name = var.Tags
   }                  
 }
 
