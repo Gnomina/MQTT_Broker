@@ -9,3 +9,14 @@ module "VPC" { #Include VPC module
     "Pico-dev-demo" = "test"
   }
 }
+
+module "SG" {
+  source = "./terraform/SG"
+  
+  vpc_id = module.VPC.vpc_id_out
+
+  Name = "Pico-SG"
+  Tags = {
+    "Pico-dev-demo" = "test"
+  }
+}
