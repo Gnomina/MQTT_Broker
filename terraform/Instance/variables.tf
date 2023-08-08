@@ -11,7 +11,7 @@ variable "key_name"{
     description = "SSH key for instance"
 }
 
-variable "sucurity_group" { # variable from  SG module -> outputs
+variable "security_group" { # variable from  SG module -> outputs
   description = "local value of the 'security_group_id' variable from the SG module -> outputs"
 }
 
