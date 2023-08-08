@@ -20,9 +20,7 @@ resource "aws_instance" "this"{
   vpc_security_group_ids = ["${var.security_group}"]
   subnet_id              = var.subnet_ids[count.index]
   associate_public_ip_address = true
-  tags = {
-    Name = var.Tags
-  }                  
+  tags = "${var.Tags}"
 }
 
 
