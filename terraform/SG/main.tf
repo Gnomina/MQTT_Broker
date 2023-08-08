@@ -5,9 +5,7 @@ resource "aws_security_group" "this" {
   name        = "${var.Name}}"
   description = "${var.description}"
   vpc_id      = "${var.vpc_id}"
-  tags = {
-    Name = "${var.Tags}"
-  }
+  tags = "${var.Tags}"
   
   dynamic "ingress" {
     for_each = ["22", "8080"]
