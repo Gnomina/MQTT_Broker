@@ -15,7 +15,7 @@ variable "security_group" { # variable from  SG module -> outputs
   description = "local value of the 'security_group_id' variable from the SG module -> outputs"
 }
 
-variable "subnet_id"  { # variable from  VPC module -> outputs
+variable "subnet_ids"  { # variable from  VPC module -> outputs
   description = "local value of the 'subnet_id_out' variable from the VPC module -> outputs"
 }
 

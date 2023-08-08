@@ -12,14 +12,16 @@ data "aws_ami" "latest_ubuntu" { # search ubuntu image in AWS
 }
 
 resource "aws_instance" "this"{
+  count = length(var.subnet_ids)
+
   ami                    = data.aws_ami.latest_ubuntu.id
   instance_type          = "${var.instance_type}"
   key_name               = "${var.key_name}"
   vpc_security_group_ids = ["${var.security_group}"]
-  subnet_id              = "${var.subnet_id}"
+  subnet_ids              = var.subnet_ids[count.index]
   associate_public_ip_address = true
   tags = {
-    Name = "${var.Tags}"
+    Name = "var.Tags"
   }                  
 }
 
