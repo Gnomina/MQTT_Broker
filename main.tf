@@ -24,7 +24,7 @@ module "SG" { # Include VPC module
 }
 
 module "instance" {
-  source = "./terrform/instance"
+  source = "./terraform/instance"
 
   subnet_id = module.VPS.subnet_id_out
   security_group = module.SG.security_group_id_out
