@@ -6,7 +6,7 @@ resource "aws_route_table" "public" {
     gateway_id = aws_internet_gateway.igw.id
   }
 
-  tags{
+  tags = {
     Name = "pico-dev-RT-public"
   }
   
