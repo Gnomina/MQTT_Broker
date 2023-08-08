@@ -17,6 +17,6 @@ module "SG" {
 
   Name = "Pico-SG"
   Tags = {
-    "Pico-dev-demo" = "test"
+    Name = "Pico-test_SG"
   }
 }

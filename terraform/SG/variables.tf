@@ -15,7 +15,6 @@ variable "description" { # local variable
 
 variable "Tags" { # local variable
   default     = "Tag-SG"
-  type        = map(any)
     description = "Tags of the SG"
 }
 
