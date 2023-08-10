@@ -39,15 +39,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: terraform apply -auto-approve
 
-      - name: Print EC2 Instance IPs
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: |
-          IP=$(terraform output instance_public_ip)
-          echo "EC2 Instance IP: $IP"
-
-      - name: Check EC2 Instance Status
+      - name: Check EC2 Instance Status and Print IP
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -61,6 +53,11 @@ jobs:
             STATUS=$(aws ec2 describe-instance-status --instance-id $INSTANCE_ID --query "InstanceStatuses[*].InstanceStatus.Status" --output text)
             if [[ "$STATUS" == "ok" ]]; then
               echo "EC2 Instance is ready!"
+
+              INSTANCE_IP_JSON=$(terraform output -json instance_public_ip)
+              INSTANCE_IP_JSON_CLEANED=$(echo "$INSTANCE_IP_JSON" | grep -Eo 'i-\w+')
+              INSTANCE_IP="$INSTANCE_IP_JSON_CLEANED"
+              echo "EC2 Instance IP: $INSTANCE_IP"
               break
             else
               echo "Waiting for EC2 Instance to become ready..."
