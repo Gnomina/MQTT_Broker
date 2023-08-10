@@ -55,7 +55,7 @@ jobs:
               echo "EC2 Instance is ready!"
 
               INSTANCE_IP_JSON=$(terraform output -json instance_public_ip)
-              INSTANCE_IP_JSON_CLEANED=$(echo "$INSTANCE_IP_JSON" | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+')
+              INSTANCE_IP_JSON_CLEANED=$(echo "$INSTANCE_IP_JSON" | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | head -1)
               INSTANCE_IP="$INSTANCE_IP_JSON_CLEANED"
               echo "EC2 Instance IP: $INSTANCE_IP"
               break
