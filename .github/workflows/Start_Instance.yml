@@ -55,7 +55,8 @@ jobs:
         run: |
           set -x
           INSTANCE_ID_JSON=$(terraform output -json instance_id)
-          INSTANCE_ID=$(echo $INSTANCE_ID_JSON | jq -r '.[0]')
+          INSTANCE_ID_JSON_CLEANED=$(echo "$INSTANCE_ID_JSON" | grep -Eo 'i-\w+')
+          INSTANCE_ID="$INSTANCE_ID_JSON_CLEANED"
 
           while true; do
             STATUS=$(aws ec2 describe-instance-status --instance-id $INSTANCE_ID --query "InstanceStatuses[*].InstanceStatus.Status" --output text)
