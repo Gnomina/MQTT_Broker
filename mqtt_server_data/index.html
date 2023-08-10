@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MQTT Data Display</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"></script>
+</head>
+<body>
+    <h1>MQTT Data:</h1>
+    <p id="mqttData"></p>
+
+    <script>
+        var mqttDataElement = document.getElementById("mqttData");
+        
+        var brokerHost = "3.67.91.220";
+	var brokerPort = 9001;
+        var clientId = "clientId_" + new Date().getTime();
+	var client = new Paho.MQTT.Client(brokerHost, brokerPort, clientId); 
+
+        client.onMessageArrived = function(message) {
+	    console.log("Received raw message:", message.payloadString);		    
+            mqttDataElement.textContent = message.payloadString;
+        };
+
+        client.connect({
+            onSuccess: function() {
+                // Замените "yourTopic" на имя вашей темы
+                client.subscribe("Test");
+            },
+            onFailure: function(err) {
+                console.log("Connection failed:", err.errorMessage);
+            }
+        });
+
+    </script>
+</body>
+</html>
+
