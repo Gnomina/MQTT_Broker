@@ -53,7 +53,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: eu-central-1
         run: |
-          INSTANCE_ID=$(aws ec2 describe-instances --query "Reservations[*].Instances[*].InstanceId" --filters "Name=ip-address,Values=$(terraform output instance_public_ip)" --output text)
+          INSTANCE_ID=$(terraform output instance_id)
           while true; do
             STATUS=$(aws ec2 describe-instance-status --instance-id $INSTANCE_ID --query "InstanceStatuses[*].InstanceStatus.Status" --output text)
             if [[ "$STATUS" == "ok" ]]; then
