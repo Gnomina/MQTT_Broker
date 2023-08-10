@@ -49,6 +49,7 @@ jobs:
         run: |
           #set -x # print each command before executing it. 
           IPs=$(terraform output -json instance_public_ip 2>/dev/null)
+          echo "Output: $IPs"
           for IP in $(echo "$IPs" | jq -r '.[]'); do
             echo "EC2 Instance IP: $IP"
           done
