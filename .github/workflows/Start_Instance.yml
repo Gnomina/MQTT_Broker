@@ -45,7 +45,6 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: eu-central-1
         run: |
-          set -x
           INSTANCE_ID_JSON=$(terraform output -json instance_id)
           INSTANCE_ID_JSON_CLEANED=$(echo "$INSTANCE_ID_JSON" | grep -Eo 'i-\w+')
           INSTANCE_ID="$INSTANCE_ID_JSON_CLEANED"
