@@ -1,4 +1,4 @@
-name: Terraform Apply
+name: Start Instance
 
 on:
   workflow_dispatch:
