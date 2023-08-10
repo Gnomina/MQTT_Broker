@@ -48,5 +48,5 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           set -x
-          IP=$(terraform output instance_ip)
+          IP=$(terraform output instance_public_ip)
           echo "EC2 Instance IP: $IP"
