@@ -44,6 +44,7 @@ jobs:
 
       - name: Print EC2 Instance IPs
         run: |
+          set -x
           IPs=$(terraform output -json instance_public_ip)
           for IP in $(echo "$IPs" | jq -r '.[]'); do
             echo "EC2 Instance IP: $IP"
