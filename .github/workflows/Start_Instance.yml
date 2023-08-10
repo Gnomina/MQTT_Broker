@@ -54,7 +54,9 @@ jobs:
           AWS_DEFAULT_REGION: eu-central-1
         run: |
           set -x
-          INSTANCE_ID=$(terraform output instance_id)
+          INSTANCE_ID_RAW=$(terraform output -raw instance_id)
+          INSTANCE_ID=${INSTANCE_ID_RAW//[$'\t\r\n ']} # удаляем лишние символы
+
           while true; do
             STATUS=$(aws ec2 describe-instance-status --instance-id $INSTANCE_ID --query "InstanceStatuses[*].InstanceStatus.Status" --output text)
             if [[ "$STATUS" == "ok" ]]; then
