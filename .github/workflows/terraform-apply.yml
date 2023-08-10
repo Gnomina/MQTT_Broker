@@ -43,6 +43,9 @@ jobs:
         run: terraform apply -auto-approve
 
       - name: Print EC2 Instance IPs
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           set -x
           IPs=$(terraform output -json instance_public_ip)
