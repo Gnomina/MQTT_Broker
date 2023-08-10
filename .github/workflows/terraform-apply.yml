@@ -48,7 +48,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           set -x
-          IPs=$(terraform output -json instance_public_ip)
+          IPs=$(terraform output -json instance_public_ip 2>/dev/null)
           for IP in $(echo "$IPs" | jq -r '.[]'); do
             echo "EC2 Instance IP: $IP"
           done
