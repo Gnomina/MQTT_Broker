@@ -16,7 +16,7 @@ module "SG" { # Include VPC module
   vpc_id = module.VPC.vpc_id_out # Variable from VPC module
   
   Name = "Pico-SG" # Security group name
-  ingress_ports = ["22", "80"] # Alloved ports
+  ingress_ports = ["22", "1883", "5000"] # Alloved ports
   
   Tags = {
     Name = "Pico-test_SG" # Security group tags name

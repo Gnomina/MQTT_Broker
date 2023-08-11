@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Temperature Monitor</title>
+    <title>Test data</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
@@ -9,12 +9,12 @@
                 $.get("/update_temperature", function(data) {
                     $("#temperature").text(data.temperature);
                 });
-            }, 500);  // Обновлять каждые 2 секунды, вы можете изменить это значение
+            }, 500); //update tik
         });
     </script>
 </head>
 <body>
-    <h1>Current Temperature</h1>
+    <h1>Test Data from microcontroller</h1>
     <p id="temperature">{{ temperature }}</p>
 </body>
 </html>

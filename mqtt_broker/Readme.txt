@@ -44,3 +44,13 @@ python3 app.py # Start server, page available on http://youIp:5000
 nohup python3 app.py > app.log 2>&1 & # Start server on background, logs write on app.log file in app directory.
 ps aux | grep app.py # Loking process app.py PID.
 kill -9 "PID" # Kill pid to stop app.py server.
+
+
+# All packages need
+sudo apt update
+sudo add-apt-repository ppa:mosquitto-dev/mosquitto-ppa
+sudo apt install mosquitto mosquitto-clients
+sudo apt install apache2
+sudo apt install python3-pip
+pip install Flask paho-mqtt
+sudo apt install git
