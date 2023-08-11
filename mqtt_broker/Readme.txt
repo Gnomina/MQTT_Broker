@@ -38,4 +38,9 @@ pip install Flask paho-mqtt
 
 Copy project dir mqtt_web_app_python_flaks.  
 cd /mqtt_web_app_python_flaks # Move to project folder.
+# To start server 
 python3 app.py # Start server, page available on http://youIp:5000
+
+nohup python3 app.py > app.log 2>&1 & # Start server on background, logs write on app.log file in app directory.
+ps aux | grep app.py # Loking process app.py PID.
+kill -9 "PID" # Kill pid to stop app.py server.
