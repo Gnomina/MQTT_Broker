@@ -1,19 +1,21 @@
-- name: Check if mosquitto is already installed
-  shell: dpkg-query -W -f=${Status} mosquitto 2>/dev/null | grep -c "ok installed"
-  register: mosquitto_installed
+- name: Check if Mosquitto is installed
+  become: true
+  command: dpkg -s mosquitto
+  register: mosquitto_package_status
   changed_when: false
+  failed_when: false
 
 - name: Add the Mosquitto PPA
   apt_repository:
     repo: "ppa:mosquitto-dev/mosquitto-ppa"
     state: present
-  when: mosquitto_installed.stdout == "0" and ansible_distribution == 'Ubuntu'
+  when: mosquitto_package_status.rc != 0 and ansible_distribution == 'Ubuntu'
   register: ppa_added
 
 - name: Update apt cache if repository was added
   apt:
     update_cache: yes
-  when: ppa_added.changed
+  when: mosquitto_package_status.rc != 0 and ppa_added.changed
 
 - name: Install mosquitto and mosquitto-clients
   apt:
@@ -21,7 +23,7 @@
       - mosquitto
       - mosquitto-clients
     state: present
-  when: mosquitto_installed.stdout == "0" and ansible_distribution == 'Ubuntu'
+  when: mosquitto_package_status.rc != 0 and ansible_distribution == 'Ubuntu'
 
 - name: Copy mosquitto configuration file
   copy:
@@ -30,7 +32,7 @@
     owner: root
     group: root
     mode: "0644"
-  when: mosquitto_installed.stdout == "0"
+  when: mosquitto_package_status.rc != 0
   notify: restart mosquitto
 
 - name: Ensure mosquitto is enabled and started
@@ -38,4 +40,4 @@
     name: mosquitto
     enabled: yes
     state: started
-  when: mosquitto_installed.stdout == "0"
+  when: mosquitto_package_status.rc != 0
