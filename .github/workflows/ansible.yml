@@ -23,6 +23,6 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
 
       - name: Run Ansible script
-        run: ansible-playbook -i path_to_your_inventory.ini your_ansible_script.yml
+        run: ansible-playbook -i inventory.ini palybook.yml
         env:
           ANSIBLE_HOST_KEY_CHECKING: False
