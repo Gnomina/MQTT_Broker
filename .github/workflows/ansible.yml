@@ -21,7 +21,6 @@ jobs:
           chmod 700 ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan your_server_ip >> ~/.ssh/known_hosts
 
       - name: Run Ansible script
         run: ansible-playbook -i path_to_your_inventory.ini your_ansible_script.yml
