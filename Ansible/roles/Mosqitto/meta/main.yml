@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: Gnom
+  description: Install mosquitto, mosquitto-clients and add mosquitto.conf
+  company: Gnom Home
+  license: license (e.g. MIT)
+  min_ansible_version: "2.4"
+  platforms:
+    - name: Ubuntu
+      versions:
+        - all
+  galaxy_tags:
+    - mosquitto
+    - mqtt
+dependencies: []
