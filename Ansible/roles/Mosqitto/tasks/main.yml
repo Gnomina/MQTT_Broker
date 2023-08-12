@@ -1,5 +1,5 @@
 - name: Check if mosquitto is already installed
-  command: dpkg-query -W -f='${Status}' mosquitto 2>/dev/null | grep -c "ok installed"
+  shell: dpkg-query -W -f=${Status} mosquitto 2>/dev/null | grep -c "ok installed"
   register: mosquitto_installed
   changed_when: false
 
@@ -30,6 +30,7 @@
     owner: root
     group: root
     mode: "0644"
+  when: mosquitto_installed.stdout == "0"
   notify: restart mosquitto
 
 - name: Ensure mosquitto is enabled and started
@@ -37,3 +38,4 @@
     name: mosquitto
     enabled: yes
     state: started
+  when: mosquitto_installed.stdout == "0"
