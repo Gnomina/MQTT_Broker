@@ -28,7 +28,7 @@
 - name: Copy mosquitto configuration file
   copy:
     src: mosquitto.conf
-    dest: /path/where/you/want/mosquitto.conf
+    dest: /etc/mosquitto/mosquitto.conf
     owner: root
     group: root
     mode: "0644"

@@ -22,10 +22,10 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
 
-      - name: Check current directory
+      - name: Check current directory, need for troubleshooting
         run: pwd
 
-      - name: List files in current directory and Ansible folder
+      - name: List files in current directory and Ansible folder, need for troubleshooting
         run: |
           ls -la
           ls -la Ansible/
