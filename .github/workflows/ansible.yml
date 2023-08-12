@@ -28,9 +28,9 @@ jobs:
       - name: List files in current directory and Ansible folder
         run: |
           ls -la
-          ls -la ansible/
+          ls -la Ansible/
 
       - name: Run Ansible script
-        run: ansible-playbook -i ansible/inventory.ini ansible/playbook.yml
+        run: ansible-playbook -i Ansible/inventory.ini Ansible/playbook.yml
         env:
           ANSIBLE_HOST_KEY_CHECKING: False
