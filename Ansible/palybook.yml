@@ -1,0 +1,5 @@
+- name: Package installation
+  hosts: Host
+  become: true
+  roles:
+    - role: Mosqitto

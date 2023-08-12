@@ -1,0 +1,27 @@
+name: Test Ansible
+
+on:
+  workflow_dispatch:
+
+jobs:
+  your_job_name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Ansible
+        run: |
+          sudo apt update
+          sudo apt install -y ansible
+
+      - name: Setup SSH Key
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan your_server_ip >> ~/.ssh/known_hosts
+
+      - name: Run Ansible script
+        run: ansible-playbook -i path_to_your_inventory.ini your_ansible_script.yml
+        env:
+          ANSIBLE_HOST_KEY_CHECKING: False
