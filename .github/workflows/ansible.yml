@@ -22,7 +22,10 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
 
+      - name: Check current directory
+        run: pwd
+
       - name: Run Ansible script
-        run: ansible-playbook -i ansible/inventory.ini ansible/playbook.yml
+        run: ansible-playbook -i Ansible/inventory.ini Ansible/playbook.yml
         env:
           ANSIBLE_HOST_KEY_CHECKING: False
