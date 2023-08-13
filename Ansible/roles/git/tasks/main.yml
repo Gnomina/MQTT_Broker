@@ -1,0 +1,12 @@
+- name: Check if Git is installed
+  become: true
+  command: git --version
+  register: git_version
+  changed_when: false
+  failed_when: false
+
+- name: Install Git
+  apt:
+    name: git
+    state: present
+  when: git_version.rc != 0
