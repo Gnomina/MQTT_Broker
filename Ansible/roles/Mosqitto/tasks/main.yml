@@ -41,3 +41,15 @@
     enabled: yes
     state: started
   when: mosquitto_package_status.rc != 0
+
+- name: Allow traffic on port 1883
+  become: true
+  ufw:
+    rule: allow
+    port: 1883
+
+- name: Allow traffic on port 9001
+  become: true
+  ufw:
+    rule: allow
+    port: 9001

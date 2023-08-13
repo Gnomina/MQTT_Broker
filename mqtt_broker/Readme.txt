@@ -1,18 +1,18 @@
 Install and settings mosqitto broker
 
-sudo apt update
-sudo add-apt-repository ppa:mosquitto-dev/mosquitto-ppa
-sudo apt install mosquitto mosquitto-clients
-sudo systemctl start mosquitto
-sudo systemctl enable mosquitto
-sudo apt update
+sudo apt update ☑
+sudo add-apt-repository ppa:mosquitto-dev/mosquitto-ppa ☑
+sudo apt install mosquitto mosquitto-clients ☑
+sudo systemctl start mosquitto ☑
+sudo systemctl enable mosquitto ☑
+sudo apt update ☑
 sudo apt install apache2
-sudo ufw allow 1883
-sudo ufw allow 9001
+sudo ufw allow 1883 ☑
+sudo ufw allow 9001 ☑
 
-sudo vi /etc/mosquitto/mosquitto.conf
+sudo vi /etc/mosquitto/mosquitto.conf ☑
 #---------------------------------------------------------------
-persistence true
+persistence true ☑
 allow_anonymous true
 persistence_location /var/lib/mosquitto/
 log_dest file /var/log/mosquitto/mosquitto.log
@@ -47,10 +47,11 @@ kill -9 "PID" # Kill pid to stop app.py server.
 
 
 # All packages need
-sudo apt update
-sudo add-apt-repository ppa:mosquitto-dev/mosquitto-ppa
-sudo apt install mosquitto mosquitto-clients
+sudo apt update ☑
+sudo add-apt-repository ppa:mosquitto-dev/mosquitto-ppa ☑
+sudo apt install mosquitto mosquitto-clients ☑
 sudo apt install apache2
 sudo apt install python3-pip
 pip install Flask paho-mqtt
-sudo apt install git
+sudo apt install nginx 
+sudo apt install git ☑
