@@ -44,5 +44,5 @@ max_keepalive 1000
 
 nohup python3 app.py > app.log 2>&1 & # start server on backgroun
 ps aux | grep app.py # grep server PID
-kill -9 'PID' # kill server PID
+kill -2 'PID' # kill server PID
 tail -f app.log # in directory app show logs
