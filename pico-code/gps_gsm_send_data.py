@@ -6,11 +6,11 @@ from micropyGPS import MicropyGPS
 from machine import Pin
 
 # Настройки MQTT
-MQTT_SERVER = "3.77.57.101"
-MQTT_PORT = 1883
-MQTT_TOPIC = "Test"
+MQTT_SERVER = "IP"
+MQTT_PORT = PORT
+MQTT_TOPIC = "TOPIC"
 
-# Настройка UART для связи с GSM модулем
+# Uart setting
 uart1 = machine.UART(1, baudrate=9600, tx=Pin(4), rx=Pin(5))
 uart0 = machine.UART(0, baudrate=9600, bits=8, parity=None,
                      stop=1, timeout=5000, rxbuf=1024)
@@ -20,20 +20,15 @@ uart0 = machine.UART(0, baudrate=9600, bits=8, parity=None,
 
 class KalmanFilter:
     def __init__(self, process_variance, measurement_variance, initial_value=0, initial_estimate_error=1):
-        # Исходные значения
-        self.estimate = initial_value  # Оценка
-        self.estimate_error = initial_estimate_error  # Ошибка оценки
-        # Дисперсия процесса (как быстро наше истинное значение изменяется во времени)
+        self.estimate = initial_value
+        self.estimate_error = initial_estimate_error
         self.process_variance = process_variance
-        # Дисперсия измерения (как точны наши измерения)
         self.measurement_variance = measurement_variance
 
     def update(self, measurement):
-        # Прогноз
         prediction = self.estimate
         prediction_error = self.estimate_error + self.process_variance
 
-        # Коррекция
         kalman_gain = prediction_error / \
             (prediction_error + self.measurement_variance)
         self.estimate = prediction + kalman_gain * (measurement - prediction)
@@ -52,7 +47,6 @@ def send_at_command(cmd, timeout=2000):
 
 
 def setup_gprs():
-    # Здесь ваши команды для настройки и активации GPRS соединения
     send_at_command("AT")
 
 
@@ -73,7 +67,6 @@ def main():
 
     while True:
         buf = uart0.readline()
-        # Update the gps instance with buf data if required
         for char in buf:
             gps.update(chr(char))
 
@@ -100,7 +93,6 @@ def main():
             decimal_longitude *= -1
 
         estimate_round = round(estimate, 2)
-        # out_message = f"Speed km/h: {estimate:.2f}, Lat: {decimal_latitude:.5f}, Lon: {decimal_longitude:.5f}"
         out_message = f"Speed km/h: {estimate:.2f}, {decimal_latitude:.5f} {decimal_longitude:.5f}"
         print(
             f"Measurement: {speed_measurement:.2f}, Estimate: {estimate:.2f}")
