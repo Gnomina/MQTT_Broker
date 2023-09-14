@@ -102,7 +102,7 @@ class INA219(object):
     def voltage_to_percentage(self):
         voltage = self.readCorrectedV() / 1000
         battery_limits = [
-            {"max": 4.2, "min": 3.60},  # 1-S batt
+            {"max": 4.2, "min": 3.35},  # 1-S batt
             {"max": 8.4, "min": 6.65},  # 2-S batt
             {"max": 12.6, "min": 10.65}  # 3-S batt
         ]
